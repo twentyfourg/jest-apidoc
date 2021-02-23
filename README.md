@@ -1,12 +1,13 @@
 #### Installation
 
-`npm i jest-doc`
+`npm i @twentyfourg/jest-apidoc`
 
 #### Configuration
 
 Creates [apidoc.js](https://apidocjs.com/) documentation from jest tests
 
 Create a jest-apidoc.json at project root with the following structure
+
 ```
 {
     "outFolder": string, // path to write apidoc to
@@ -15,6 +16,7 @@ Create a jest-apidoc.json at project root with the following structure
 ```
 
 From your tests, call `setApiResponse({ method, params, status, response })`. I recommend writing an api request wrapper like so (uses supertest):
+
 ```
 const request = require('supertest');
 const { setApiResponse } = require('jest-apidoc');
@@ -58,6 +60,7 @@ const apiRequest = async (
 ```
 
 Expects tests to be structured like:
+
 ```
 describe('some-route.routes.js`, () => {
     describe('GET /some-route', () => {
@@ -77,4 +80,5 @@ afterAll(() => {
     writeApiDoc();
 })
 ```
+
 Above will write all response set through `writeApiResponse()` to the `outFolder` of `jest-apidoc.json`
