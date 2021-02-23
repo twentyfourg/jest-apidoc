@@ -12,7 +12,7 @@
     "url": "https://github.com/twentyfourg/jest-apidoc"
   },
   "publishConfig": {
-    "registry": "https://npm.ppkg.github.com"
+    "registry": "https://npm.pkg.github.com"
   },
   "author": "Kyle Richardson"
 }
