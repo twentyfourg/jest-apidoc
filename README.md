@@ -1,6 +1,6 @@
 #### Installation
 
-`npm i @twentyfourg/jest-apidoc`
+`npm i jest-apidoc`
 
 #### Configuration
 
@@ -81,4 +81,6 @@ afterAll(() => {
 })
 ```
 
-Above will write all response set through `writeApiResponse()` to the `outFolder` of `jest-apidoc.json`
+Above will write all response set through `setApiResponse()` to the `outFolder` of `jest-apidoc.json`
+
+See /example for test and generate api doc example
