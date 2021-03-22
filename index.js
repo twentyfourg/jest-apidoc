@@ -21,27 +21,6 @@ const baseApiDoc =
   {{successResponses}}{{errorResponses}}*/
 `;
 
-let lastTestName = "";
-let lastDescribeName = "";
-
-const originalTest = global.test;
-global.test = function (name, callback, timeout) {
-  lastTestName = name;
-  originalTest(name, callback, timeout);
-};
-
-const originalIt = global.it;
-global.it = function (name, callback, timeout) {
-  lastTestName = name;
-  originalIt(name, callback, timeout);
-};
-
-const originalDescribe = global.describe;
-global.describe = function (name, callback) {
-  lastDescribeName = name;
-  originalDescribe(name, callback);
-};
-
 /**
  * current test name to be structured like "admin-session.routes PUT /admin/vendors/:vendorId updates and returns vendor"
  * parse out PUT /admin/vendors/:vendorId
@@ -96,6 +75,11 @@ const createResponse = (response) => {
   return `\n  ${jsonResponse}\n`;
 };
 
+const getRouteToWrite = (currentTestName) => {
+  const parts = currentTestName.split(" ");
+  return `${parts[1]} ${parts[2]}`;
+};
+
 /**
  * apiCalls: {
  *  [route]: {
@@ -144,7 +128,7 @@ const setApiResponse = ({ method, params, status, response }) => {
   const { currentTestName } = jestState;
   const apiGroup = getGroupNameFromTestName(currentTestName);
   const apiName = `${method.toUpperCase()} ${apiGroup}`;
-  const routeToWrite = lastDescribeName.split(" ")[1] || lastDescribeName;
+  const routeToWrite = getRouteToWrite(currentTestName);
 
   if (!ignoreRoutes.includes(routeToWrite)) {
     populateUndefined({ method, route: routeToWrite, status });
@@ -172,8 +156,6 @@ const setApiResponse = ({ method, params, status, response }) => {
       apiGroup,
       apiName,
       routeTitle: apiName,
-      lastDescribeName,
-      lastTestName,
       params: paramsToWrite,
       statuses: {
         ...apiCalls[routeToWrite][method].statuses,
