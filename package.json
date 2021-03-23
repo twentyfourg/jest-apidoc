@@ -1,6 +1,6 @@
 {
   "name": "jest-apidoc",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "create apidoc from jest route tests",
   "main": "index.js",
   "scripts": {
@@ -9,5 +9,10 @@
   "license": "ISC",
   "repository": "git://github.com/twentyfourg/jest-apidoc.git",
   "author": "Kyle Richardson",
-  "keywords": ["apidoc", "api documentation", "jest", "doc"]
+  "keywords": [
+    "apidoc",
+    "api documentation",
+    "jest",
+    "doc"
+  ]
 }
