@@ -127,7 +127,8 @@ const setApiResponse = ({ method, params, status, response }) => {
 
   const { currentTestName } = jestState;
   const apiGroup = getGroupNameFromTestName(currentTestName);
-  const apiName = `${method.toUpperCase()} ${apiGroup}`;
+  const docName = getDocNameFromTestName(currentTestName);
+  const apiName = `${method.toUpperCase()} ${docName}`;
   const routeToWrite = getRouteToWrite(currentTestName);
 
   if (!ignoreRoutes.includes(routeToWrite)) {
@@ -152,7 +153,7 @@ const setApiResponse = ({ method, params, status, response }) => {
     // @todo check response size too
 
     apiCalls[routeToWrite][method] = {
-      docName: getDocNameFromTestName(currentTestName),
+      docName,
       apiGroup,
       apiName,
       routeTitle: apiName,
